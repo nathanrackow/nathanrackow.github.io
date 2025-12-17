@@ -28,26 +28,32 @@
       box-sizing: border-box;
     }
 
+    /* LOGO */
     img {
       max-width: 260px;
       margin-bottom: 30px;
     }
 
+    /* MAIN TITLE — RESPONSIVE & CLEAN */
     h1 {
-      font-size: 4.5rem;
-      margin-bottom: 20px;
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      margin-bottom: 25px;
+      word-break: keep-all;
     }
 
+    /* SECTION HEADERS */
     h2 {
-      font-size: 2.6rem;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
       margin-top: 50px;
       margin-bottom: 15px;
-      text-transform: uppercase;
       letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
+    /* BODY TEXT */
     p {
-      font-size: 1.8rem;
+      font-size: clamp(1.3rem, 3.5vw, 1.8rem);
       max-width: 900px;
       line-height: 1.6;
       margin: 0 auto 10px auto;
@@ -55,12 +61,12 @@
 
     .services p,
     .contact p {
-      font-size: 1.9rem;
+      font-size: clamp(1.4rem, 3.8vw, 1.9rem);
     }
 
     footer {
       margin-top: 60px;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       opacity: 0.7;
     }
   </style>
@@ -71,8 +77,11 @@
   <!-- LOGO -->
   <img src="logo.png" alt="Rackalize Transportation Logo">
 
-  <!-- COMPANY NAME -->
-  <h1>Rackalize Transportation</h1>
+  <!-- COMPANY NAME (STACKED ON PURPOSE FOR PERFECT FIT) -->
+  <h1>
+    Rackalize<br>
+    Transportation
+  </h1>
 
   <!-- TAGLINE -->
   <p>
