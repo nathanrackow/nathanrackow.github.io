@@ -10,62 +10,107 @@
       scroll-behavior: smooth;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      min-height: 100vh;
       font-family: Arial, Helvetica, sans-serif;
-
-      /* GREEN MATCHING THE LOGO */
       background: #445B57;
       color: #ffffff;
-
       text-align: center;
-      box-sizing: border-box;
       overflow-x: hidden;
     }
 
-    /* FIXED BACKGROUND LOGO */
+    /* FIXED LOGO IN BACKGROUND */
     .background-logo {
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      width: min(90vw, 850px);
-      height: auto;
 
-      opacity: 0.16;
+      transform: translate(-50%, -50%);
+
+      width: 100%;
+      height: 100vh;
+
+      object-fit: contain;
 
       z-index: 0;
       pointer-events: none;
+
+      background: #445B57;
     }
 
-    /* DARK OVERLAY TO KEEP TEXT EASY TO READ */
-    .overlay {
+    /* GREEN TINT
+       Starts completely transparent.
+       JavaScript increases opacity as you scroll.
+    */
+    .green-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(34, 49, 47, 0.20);
+
+      background: #445B57;
+
+      opacity: 0;
+
       z-index: 1;
       pointer-events: none;
+
+      transition: opacity 0.1s linear;
     }
 
-    /* WEBSITE CONTENT */
-    .content {
+    /* FIRST SCREEN */
+    .hero {
       position: relative;
       z-index: 2;
+
+      width: 100%;
+      height: 100vh;
+
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+
+      padding: 30px;
+    }
+
+    /* SMALL SCROLL INDICATOR */
+    .scroll-text {
+      font-size: 1rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+
+      padding: 10px 18px;
+
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 20px;
+
+      margin-bottom: 20px;
+    }
+
+    /* MAIN WEBSITE CONTENT */
+    .content {
+      position: relative;
+      z-index: 3;
+
+      width: 100%;
 
       display: flex;
       flex-direction: column;
       align-items: center;
 
       padding: 70px 20px 60px;
-      box-sizing: border-box;
     }
 
     /* COMPANY NAME */
     h1 {
       font-size: clamp(2.8rem, 10vw, 5rem);
       line-height: 1.05;
-      margin: 40px 0 25px;
+
+      margin: 20px 0 25px;
+
       word-break: keep-all;
     }
 
@@ -74,18 +119,25 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+
       width: 100%;
-      margin-bottom: 45px;
+
+      margin-bottom: 40px;
     }
 
     .authority-line {
+      display: block;
+
       width: 100%;
+
       text-align: center;
 
       font-size: clamp(2rem, 6vw, 3.2rem);
+
       font-weight: bold;
 
       letter-spacing: 1px;
+
       line-height: 1.3;
 
       white-space: nowrap;
@@ -94,9 +146,12 @@
     /* TAGLINE */
     .tagline {
       font-size: clamp(1.4rem, 4vw, 2rem);
+
       max-width: 850px;
+
       line-height: 1.6;
-      margin-bottom: 30px;
+
+      margin: 0 auto 30px;
     }
 
     .tagline-main {
@@ -104,7 +159,14 @@
       font-size: 1.1em;
     }
 
-    /* SECTION HEADERS */
+    /* SECTIONS */
+    .section {
+      width: 100%;
+      max-width: 950px;
+
+      padding: 15px 10px;
+    }
+
     h2 {
       font-size: clamp(2rem, 6vw, 3rem);
 
@@ -112,12 +174,13 @@
       margin-bottom: 20px;
 
       letter-spacing: 2px;
+
       text-transform: uppercase;
     }
 
-    /* BODY TEXT */
     p {
       font-size: clamp(1.4rem, 4vw, 2rem);
+
       max-width: 900px;
 
       line-height: 1.7;
@@ -130,39 +193,61 @@
       font-size: clamp(1.5rem, 4.2vw, 2.1rem);
     }
 
-    /* CONTENT BLOCKS */
-    .section {
-      width: 100%;
-      max-width: 950px;
-
-      padding: 15px 10px;
-      box-sizing: border-box;
-    }
-
-    /* FOOTER */
     footer {
       margin-top: 90px;
       padding-bottom: 30px;
 
       font-size: 1.1rem;
+
       opacity: 0.8;
     }
+
+    /* SMALL PHONE ADJUSTMENTS */
+    @media (max-width: 600px) {
+
+      .background-logo {
+        width: 100%;
+        height: 100vh;
+        object-fit: contain;
+      }
+
+      .content {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .authority-line {
+        font-size: clamp(1.9rem, 7vw, 2.7rem);
+      }
+    }
+
   </style>
 </head>
 
 <body>
 
-  <!-- LOGO STAYS IN BACKGROUND WHILE YOU SCROLL -->
+  <!-- LOGO STAYS FIXED -->
   <img
     class="background-logo"
     src="logo.jpg"
-    alt=""
+    alt="Rackalize Transportation Logo"
   >
 
-  <!-- LIGHT DARKENING LAYER FOR READABILITY -->
-  <div class="overlay"></div>
+  <!-- GREEN TINT THAT APPEARS AS YOU SCROLL -->
+  <div class="green-overlay" id="greenOverlay"></div>
 
-  <!-- ALL TEXT SCROLLS OVER THE LOGO -->
+
+  <!-- FIRST SCREEN SHOWS CLEAR LOGO -->
+  <section class="hero">
+
+    <div class="scroll-text">
+      Scroll Down
+    </div>
+
+  </section>
+
+
+  <!-- WEBSITE INFORMATION -->
   <main class="content">
 
     <!-- COMPANY NAME -->
@@ -170,6 +255,7 @@
       Rackalize<br>
       Transportation
     </h1>
+
 
     <!-- AUTHORITY NUMBERS -->
     <section class="authority">
@@ -184,34 +270,47 @@
 
     </section>
 
+
     <!-- TAGLINE -->
     <div class="tagline">
+
       <span class="tagline-main">
         Professional Freight Transportation
       </span>
+
       <br>
+
       Moving Freight Reliably. Delivering With Confidence.
+
     </div>
+
 
     <!-- SERVICES -->
     <section class="section">
 
-      <h2>Services</h2>
+      <h2>
+        Services
+      </h2>
 
       <div class="services">
+
         <p>
           • Dry Van<br>
           • Power-Only<br>
           • Local & Regional
         </p>
+
       </div>
 
     </section>
 
+
     <!-- SERVICE AREA -->
     <section class="section">
 
-      <h2>Service Area</h2>
+      <h2>
+        Service Area
+      </h2>
 
       <p>
         Alabama • Georgia • Southeast US
@@ -219,19 +318,25 @@
 
     </section>
 
+
     <!-- CONTACT -->
     <section class="section">
 
-      <h2>Contact</h2>
+      <h2>
+        Contact
+      </h2>
 
       <div class="contact">
+
         <p>
           📞 (706) 518-3255<br>
           📧 rackalize@gmail.com
         </p>
+
       </div>
 
     </section>
+
 
     <!-- FOOTER -->
     <footer>
@@ -239,6 +344,38 @@
     </footer>
 
   </main>
+
+
+  <script>
+
+    const overlay = document.getElementById("greenOverlay");
+
+    window.addEventListener("scroll", function () {
+
+      const scrollAmount = window.scrollY;
+
+      /*
+        At the very top:
+        opacity = 0
+        Logo is completely clear.
+
+        As the user scrolls:
+        green tint becomes stronger.
+
+        Maximum tint = 82%.
+      */
+
+      let opacity = scrollAmount / 500;
+
+      if (opacity > 0.82) {
+        opacity = 0.82;
+      }
+
+      overlay.style.opacity = opacity;
+
+    });
+
+  </script>
 
 </body>
 </html>
